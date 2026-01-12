@@ -30,4 +30,11 @@ export class OrderStatusHistoryService {
 
         return OrderStatusHistoryModel.create(doc);
     }
+    async findByEntity1(entity1Id: string, opts: { from: number; size: number }) {
+        return OrderStatusHistoryModel.find({ entity1Id })
+            .sort({ time: -1 })
+            .skip(opts.from)
+            .limit(opts.size)
+            .lean();
+    }
 }

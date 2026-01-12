@@ -60,4 +60,26 @@ orderStatusHistoryRouter.get("/api/entity3", async (req, res) => {
         return res.status(400).json({message: "entity1Id is required (query param)"});
     }
 
+    let size = 20;
+    if (sizeRaw !== undefined) {
+        const parsed = Number(sizeRaw);
+        if (!Number.isInteger(parsed) || parsed <= 0) {
+            return res.status(400).json({ message: "size must be a positive integer" });
+        }
+        size = parsed;
+    }
+    let from = 0;
+    if (fromRaw !== undefined) {
+        const parsed = Number(fromRaw);
+        if (!Number.isInteger(parsed) || parsed < 0) {
+            return res.status(400).json({ message: "from must be a non-negative integer" });
+        }
+        from = parsed;
+    }
+    try {
+        const items = await service.findByEntity1(entity1Id, { from, size });
+        return res.json(items);
+    } catch {
+        return res.status(500).json({ message: "Internal error" });
+    }
 });

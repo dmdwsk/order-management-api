@@ -1,6 +1,6 @@
 import { app } from "./app.js";
 import { connectDb } from "./database.connection.js";
-
+console.log("🔥 INDEX FILE LOADED");
 const PORT = Number(process.env.PORT ?? 3000);
 
 async function bootstrap() {
