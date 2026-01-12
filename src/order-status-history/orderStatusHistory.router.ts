@@ -51,3 +51,13 @@ orderStatusHistoryRouter.post("/api/entity3", async (req, res) => {
     }
 
 });
+orderStatusHistoryRouter.get("/api/entity3", async (req, res) => {
+    const entity1Id = req.query.entity1Id;
+    const sizeRaw = req.query.size;
+    const fromRaw = req.query.from;
+
+    if (typeof entity1Id !== "string" || !entity1Id.trim()) {
+        return res.status(400).json({message: "entity1Id is required (query param)"});
+    }
+
+});
