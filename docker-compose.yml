@@ -13,6 +13,7 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - ENTITY1_BASE_URL=http://host.docker.internal:7777
       - MONGO_URI=mongodb://mongo:27017/order_management
     depends_on:
       - mongo
