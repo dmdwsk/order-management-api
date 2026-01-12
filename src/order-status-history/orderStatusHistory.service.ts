@@ -37,4 +37,20 @@ export class OrderStatusHistoryService {
             .limit(opts.size)
             .lean();
     }
+    async countByEntity1Ids(entity1Ids: string[]) {
+
+        const uniqueIds = [...new Set(entity1Ids)];
+
+        const rows = await OrderStatusHistoryModel.aggregate([
+            { $match: { entity1Id: { $in: uniqueIds } } },
+            { $group: { _id: "$entity1Id", count: { $sum: 1 } } },
+        ]);
+
+        const out: Record<string, number> = {};
+        for (const id of uniqueIds) out[id] = 0;
+        for (const r of rows) out[String(r._id)] = Number(r.count);
+
+        return out;
+    }
 }
+
