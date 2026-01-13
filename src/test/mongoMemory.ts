@@ -8,12 +8,14 @@ export async function connectMemoryMongo() {
     await mongoose.connect(mongo.getUri());
 }
 
-export async function clearMemoryMongo() {
+export async function clearMemoryMongo(): Promise<void> {
     const cols = mongoose.connection.collections;
-    for (const k of Object.keys(cols)) {
-        await cols[k].deleteMany({});
+
+    for (const col of Object.values(cols)) {
+        await col.deleteMany({});
     }
 }
+
 
 export async function closeMemoryMongo() {
     await mongoose.disconnect();
