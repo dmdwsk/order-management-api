@@ -15,7 +15,7 @@ Built with **Node.js**, **Express**, **TypeScript**, **MongoDB (Mongoose)**.
     - **Jest**
     - **Supertest**
     - **MongoDB Memory Server**
-    - Fake Entity1 HTTP stub
+    - **Fake Entity1 HTTP stub**
 
 ---
 
